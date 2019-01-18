@@ -1,0 +1,1 @@
+java -cp .\wordsaurier.jar de.drogschneider.wordsaurier.Application --allowedChars ausatmenAUSATMEN --chars 80 --lines 10

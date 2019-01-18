@@ -30,10 +30,12 @@ public class DocumentWriter {
 
 		// create a temporary file
 		final String timeLog = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_hh-mm-ss"));
-		final File file = new File("./target/" + timeLog + ".txt");
+		final File file = new File("wordsaurier-document-" + timeLog + ".txt");
+		
 
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
 
+			
 			writer.write("Wordsaurier document\r\n");
 			writer.write(this.documentSpecification.toString() + "\r\n");
 			writer.write("---------------------\r\n");
