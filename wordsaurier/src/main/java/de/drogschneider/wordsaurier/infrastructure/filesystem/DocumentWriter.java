@@ -1,9 +1,10 @@
 package de.drogschneider.wordsaurier.infrastructure.filesystem;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,7 +17,7 @@ import de.drogschneider.wordsaurier.domian.model.Document;
 public class DocumentWriter {
 
 	private static final Logger LOG = LoggerFactory.getLogger(DocumentWriter.class);
-	
+
 	private final Document document;
 	private final DocumentSpecification documentSpecification;
 
@@ -29,11 +30,12 @@ public class DocumentWriter {
 	public void write() throws IOException {
 
 		// create a temporary file
-		final String timeLog = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_hh-mm-ss"));
+		final String timeLog = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
 		final File file = new File("wordsaurier-document-" + timeLog + ".txt");
 		
 
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+		try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8)) {
+			
 
 			
 			writer.write("Wordsaurier document\r\n");

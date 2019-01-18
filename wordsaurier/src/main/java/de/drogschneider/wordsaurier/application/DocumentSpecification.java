@@ -31,8 +31,9 @@ public class DocumentSpecification {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this, ToStringStyle.NO_CLASS_NAME_STYLE).append(this.charactersInLine)
-				.append(this.linesInDocument).append(this.allowedCharacters).build();
+		return new ToStringBuilder(this, ToStringStyle.NO_CLASS_NAME_STYLE)
+				.append("charactersInLine", this.charactersInLine).append("linesInDocument", this.linesInDocument)
+				.append("allowedCharacters", this.allowedCharacters).build();
 	}
 
 }
