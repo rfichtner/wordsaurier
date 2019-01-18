@@ -21,3 +21,8 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+wordsaurier/.settings/org.eclipse.m2e.core.prefs
+wordsaurier/.settings/org.eclipse.jdt.core.prefs
+wordsaurier/.settings/org.eclipse.core.resources.prefs
+wordsaurier/.project
+wordsaurier/.classpath
