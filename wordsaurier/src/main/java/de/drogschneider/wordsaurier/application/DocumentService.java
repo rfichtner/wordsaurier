@@ -23,7 +23,7 @@ public class DocumentService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(DocumentService.class);
 
-	public Document buildDocument(final String letters, final int linesCount, final int lineLength) {
+	public Document buildDocument(final DocumentSpecification documentSpecification) {
 
 		try (InputStream is = this.getClass().getClassLoader().getResourceAsStream("wordlist-german.dic")) {
 			final Stream<String> fileLines = new BufferedReader(
@@ -32,7 +32,7 @@ public class DocumentService {
 			LOG.debug("reading dictonary");
 			final Wordlist words = new Wordlist(fileLines.map(s -> new Word(s)).collect(Collectors.toList()));
 
-			words.addFilter(new LetterFilter(letters));
+			words.addFilter(new LetterFilter(documentSpecification.getAllowedCharacters()));
 
 			LOG.debug("filtering words");
 			final List<Word> matchingWords = words.getMatches();
@@ -40,10 +40,10 @@ public class DocumentService {
 			Collections.shuffle(matchingWords);
 
 			final List<Line> lines = new ArrayList<>();
-			for (int i = 0; i < linesCount; i++) {
+			for (int i = 0; i < documentSpecification.getLinesInDocument(); i++) {
 
 				LOG.debug("building line {}", i + 1);
-				final Line line = Line.of(lineLength, matchingWords);
+				final Line line = Line.of(documentSpecification.getCharactersInLine(), matchingWords);
 				lines.add(line);
 
 			}
