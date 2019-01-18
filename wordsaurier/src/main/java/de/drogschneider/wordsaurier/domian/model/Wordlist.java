@@ -32,6 +32,6 @@ public class Wordlist {
 	}
 
 	public List<Word> getMatches() {
-		return this.words.stream().filter(this.getAllFilters()).limit(1000).collect(Collectors.toList());
+		return this.words.stream().filter(this.getAllFilters()).collect(Collectors.toList());
 	}
 }

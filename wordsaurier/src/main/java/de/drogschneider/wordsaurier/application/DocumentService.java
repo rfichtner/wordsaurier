@@ -46,6 +46,10 @@ public class DocumentService {
 				final Line line = Line.of(documentSpecification.getCharactersInLine(), matchingWords);
 				lines.add(line);
 
+				if (LOG.isDebugEnabled()) {
+					LOG.debug("line: {}", line.getContent());
+				}
+
 			}
 
 			return Document.of(lines);
