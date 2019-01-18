@@ -29,12 +29,12 @@ public class DocumentService {
 			final Stream<String> fileLines = new BufferedReader(
 					new InputStreamReader(is, Charset.forName("ISO-8859-1"))).lines();
 
-			LOG.debug("reading dictonary");
+			LOG.info("reading dictonary");
 			final Wordlist words = new Wordlist(fileLines.map(s -> new Word(s)).collect(Collectors.toList()));
 
 			words.addFilter(new LetterFilter(documentSpecification.getAllowedCharacters()));
 
-			LOG.debug("filtering words");
+			LOG.info("filtering words");
 			final List<Word> matchingWords = words.getMatches();
 
 			Collections.shuffle(matchingWords);

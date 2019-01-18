@@ -34,7 +34,10 @@ public class Line {
 			if (wordResult.isPresent()) {
 				final Word word =wordResult.get();
 				line.addWord(word);
+
+				// move word to end of list
 				words.remove(word);
+				words.add(word);
 				currentCharacterCount = line.length();
 				remainingCharactersForWord = characterCount - currentCharacterCount-1;
 			}else {

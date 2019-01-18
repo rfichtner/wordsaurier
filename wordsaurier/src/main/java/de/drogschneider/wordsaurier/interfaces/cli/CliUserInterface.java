@@ -9,6 +9,8 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.drogschneider.wordsaurier.application.DocumentService;
 import de.drogschneider.wordsaurier.application.DocumentSpecification;
@@ -16,6 +18,8 @@ import de.drogschneider.wordsaurier.domian.model.Document;
 import de.drogschneider.wordsaurier.infrastructure.filesystem.DocumentWriter;
 
 public class CliUserInterface {
+
+	private static final Logger LOG = LoggerFactory.getLogger(CliUserInterface.class);
 
 	private final String[] args;
 
@@ -28,12 +32,12 @@ public class CliUserInterface {
 
 		final Options options = new Options();
 
-		final Option linesInDocument = Option.builder().longOpt("lines").hasArg().desc("lines in document")
-				.required().build();
+		final Option linesInDocument = Option.builder().longOpt("lines").hasArg().desc("lines in document").required()
+				.build();
 		options.addOption(linesInDocument);
 
-		final Option charactersInLine = Option.builder().longOpt("chars").hasArg()
-				.desc("characters in line").required().build();
+		final Option charactersInLine = Option.builder().longOpt("chars").hasArg().desc("characters in line").required()
+				.build();
 		options.addOption(charactersInLine);
 
 		final Option allowedCharacters = Option.builder().longOpt("allowedChars").hasArg()
@@ -64,7 +68,9 @@ public class CliUserInterface {
 		final DocumentService documentService = new DocumentService();
 		final Document document = documentService.buildDocument(documentSpecification);
 
-		System.out.println(document.getContent());
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("document: \r\n{}", document.getContent());
+		}
 		final DocumentWriter documentWriter = new DocumentWriter(document, documentSpecification);
 		documentWriter.write();
 	}
